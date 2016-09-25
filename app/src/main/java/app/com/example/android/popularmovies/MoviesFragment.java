@@ -28,6 +28,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -151,12 +152,17 @@ public class MoviesFragment extends Fragment {
             try {
                 if(strings[0].equals("favorite")) {
                     SharedPreferences prefFavoriteMovies = getActivity().getSharedPreferences("favorites", Context.MODE_PRIVATE);
-                    int size = prefFavoriteMovies.getInt("favorites_size", 0);
-                    String[] favoriteMovies= new String[size];
-                    for(int i=0;i<size;i++) {
-                        favoriteMovies[i]= prefFavoriteMovies.getString("favorites_" + i, null);
+                    Map<String, ?> allEntries =prefFavoriteMovies.getAll();
+                    String[] favoriteMovies= new String[allEntries.size()];
+                    int i =0;
+                    for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+                        favoriteMovies[i]=entry.getValue().toString();
+
+                        //Log.d("map values", entry.getKey() + ": " + entry.getValue().toString());
+                        i++;
                     }
                     return favoriteMovies;
+
 
                 }
 

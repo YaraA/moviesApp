@@ -1,6 +1,5 @@
 package app.com.example.android.popularmovies;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -21,8 +20,6 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity implements MovieListener {
 
     /**
@@ -31,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements MovieListener {
      */
     private GoogleApiClient client;
     boolean mTwoPane;
-    public static ArrayList<String> favorites= new ArrayList<String>();
+    //public static ArrayList<String> favorites= new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,16 +147,9 @@ public class MainActivity extends AppCompatActivity implements MovieListener {
         String id= (String) ((TextView) this.findViewById(R.id.title)).getTag();
 
         String movie= poster + "#" + overview + "#" + rating + "#" + originalTitle + "#" + year + "#" + id;
-        int index= favorites.indexOf(movie);
-        if(index == -1)
-            favorites.add(poster + "#" + overview + "#" + rating + "#" + originalTitle + "#" + year + "#" + id);
-        SharedPreferences sharedFavorites = this.getSharedPreferences("favorites", Context.MODE_PRIVATE);
-        SharedPreferences.Editor sharedFavoritesEditor = sharedFavorites.edit();
-        sharedFavoritesEditor.clear();
-        sharedFavoritesEditor.putInt("favorites_size", favorites.size());
-        for(int i=0;i<favorites.size();i++)
-            sharedFavoritesEditor.putString("favorites_" + i, favorites.get(i));
-        sharedFavoritesEditor.commit();
+        SharedPreferences.Editor editor = getSharedPreferences("favorites", MODE_PRIVATE).edit();
+        editor.putString(id, movie);
+        editor.commit();
 
     }
 }

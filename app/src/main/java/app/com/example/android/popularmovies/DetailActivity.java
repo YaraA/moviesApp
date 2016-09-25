@@ -1,6 +1,5 @@
 package app.com.example.android.popularmovies;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,11 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 public class DetailActivity extends AppCompatActivity {
-
-    public static ArrayList<String> favorites= new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +47,9 @@ public class DetailActivity extends AppCompatActivity {
         String id= (String) ((TextView) this.findViewById(R.id.title)).getTag();
 
         String movie= poster + "#" + overview + "#" + rating + "#" + originalTitle + "#" + year + "#" + id;
-        int index= favorites.indexOf(movie);
-        if(index == -1)
-            favorites.add(poster + "#" + overview + "#" + rating + "#" + originalTitle + "#" + year + "#" + id);
-        SharedPreferences sharedFavorites = this.getSharedPreferences("favorites", Context.MODE_PRIVATE);
-        SharedPreferences.Editor sharedFavoritesEditor = sharedFavorites.edit();
-        sharedFavoritesEditor.clear();
-        sharedFavoritesEditor.putInt("favorites_size", favorites.size());
-        for(int i=0;i<favorites.size();i++)
-            sharedFavoritesEditor.putString("favorites_" + i, favorites.get(i));
-        sharedFavoritesEditor.commit();
+        SharedPreferences.Editor editor = getSharedPreferences("favorites", MODE_PRIVATE).edit();
+        editor.putString(id, movie);
+        editor.commit();
 
     }
 
