@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class DetailActivity extends AppCompatActivity {
 
     @Override

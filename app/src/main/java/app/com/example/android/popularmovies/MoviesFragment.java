@@ -44,7 +44,7 @@ public class MoviesFragment extends Fragment {
     {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        updateMovies();
+        //updateMovies();
     }
     public void onStart(){
         super.onStart();
