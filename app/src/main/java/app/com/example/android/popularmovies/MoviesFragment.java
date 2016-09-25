@@ -76,6 +76,7 @@ public class MoviesFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView= inflater.inflate(R.layout.fragment_main, container, false);
+        PreferenceManager.setDefaultValues(getActivity(), R.xml.pref_general, true);
         ArrayList<String> arrayOfMovies= new ArrayList<String>();
         moviePosterAdapter= new ImageAdapter(getActivity(), R.layout.fragment_main,arrayOfMovies);
         GridView gridView= (GridView) rootView.findViewById(R.id.gridView);
