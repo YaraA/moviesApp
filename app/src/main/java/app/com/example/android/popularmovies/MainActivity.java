@@ -55,11 +55,11 @@ public class MainActivity extends AppCompatActivity implements MovieListener {
         } else {
             mTwoPane = true;
         }
-        if (null == savedInstanceState) {
+        //if (null == savedInstanceState) {
             MoviesFragment movieFragment = new MoviesFragment();
             movieFragment.setNameListener(this);
             getSupportFragmentManager().beginTransaction().replace(R.id.flPanel_One, movieFragment).commit();
-        }
+        //}
 
     }
 
